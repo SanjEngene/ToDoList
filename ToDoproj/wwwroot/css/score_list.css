@@ -1,0 +1,215 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+body > header{
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+body > sidebar{
+    height: auto;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    float: left;
+}
+main{
+    height: auto;
+    margin-left: 300px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+main::after{
+    content: ' ';
+    display: block;
+    width: 0px;
+    height: 0px;
+    clear: both;
+}
+main > div:first-child > a{
+    display: inline-block;
+    width: 100px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    margin: 10px 0px 10px 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    line-height: 35px;
+}
+body > .comment_section{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    clear: both;
+    margin: 0px 323px 0px 300px;
+}
+.comment_write{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+.comment_write > ul{
+    list-style-type: none;
+    padding: 0px;
+    position: relative;
+    width: 800px;
+    height: 150px;
+}
+.comment_write > ul > li{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    position: absolute;
+}
+.comment_write > ul > li:first-child{
+    width: 100px;
+    height: 120px;
+    left: 15px;
+}
+.comment_write > ul > li:last-child{
+    left: 115px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.comment_write > ul form > div > textarea{
+    width: 700px;
+    height: 80px;
+}
+.comment_write > ul form > div > textarea:focus{
+    outline: none;
+}
+.message_button_container{
+    margin-top: 10px;
+    margin-left: 480px;
+}
+.message_button{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: inline-block;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.message_button:focus{
+    outline: none;
+}
+.comment_read > div{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+.comment_read > div > ul{
+    list-style-type: none;
+    padding-left: 0px;
+    position: relative;
+    height: 120px;
+}
+.comment_read > div > ul > li{
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+.comment_read > div > ul > li:first-child{
+    width: 100px;
+    height: 120px;
+    left: 15px;
+}
+.comment_read > div > ul > li:last-child{
+    left: 135px;
+    width: 700px;
+}
+.comment_read > div > ul > li:last-child > p{
+    margin-top: 10px;
+    text-indent: 10px;
+}
+body > sidebar > div{
+    height: auto;
+    width: auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+body > sidebar > div > div:first-child{
+    margin: 39px 0px 0px 42px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+body > sidebar > div > div:last-child{
+    margin: 0px 0px 10px 30px;
+}
+body > sidebar > div > div:last-child > form > p{
+    margin: 20px 0px 0px 0px;
+}
+body > sidebar > div > div:last-child > form > p:last-child{
+    margin-bottom: 20px;
+}
+body > sidebar > div > div:last-child > form > p > button[type="submit"]{
+    display: inline-block;
+    width: 95px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+body > sidebar > div > div:last-child > form > p > button[type="submit"]:focus{
+    outline: none;
+}
+body > sidebar > p{
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+body > header > nav > ul{
+    padding-left: 0px;
+    margin: 0px 0px 0px 70px;
+    list-style-type: none;
+    height: auto;
+}
+body > header > nav > ul > li{
+    display: inline-block;
+    height: 60px;
+    background-color:rgba(255, 255, 255, 0.2);
+    border: 1px solid black;    
+}
+body > header > nav > ul > li > a{
+    display: block;
+    height: 60px;
+}
+.score_list_block{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+.score_list_block > div{
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    float: left;
+    margin-left: 30px;
+}
+.score_list_block > div > div{
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    float: left;
+}
+.place{
+    width: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    line-height: 120px;
+    font-weight: 700;
+}
+.user_information{
+    width: 700px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.user_information > p{
+    margin: 25px 0px 0px 0px;
+    text-indent: 30px; 
+}
+.user_photo{
+    width: 120px;
+}

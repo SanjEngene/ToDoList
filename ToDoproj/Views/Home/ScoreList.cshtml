@@ -1,0 +1,137 @@
+﻿@model IEnumerable<ToDoproj.Models.User>
+@using System.Linq
+@{ 
+    int count = 1;
+    string pathToImage = "~/images/" + (ViewBag.User.PhotoFilePath ?? "user-nophoto.jpg");
+    int indent = 30;
+}
+<!DOCTYPE html> 
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <link href='~/css/score_list.css' type='text/css' rel='stylesheet'>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li style="width: 230px;">
+                        <a asp-action="ScoreList" asp-controller="Home" asp-route-id="@ViewBag.User.Id" style="width: 230px;"></a>
+                    </li>
+                    <li style="width: 150px;">
+                        <a asp-action="Create" asp-controller="ToDo" asp-route-userId="@ViewBag.User.Id" style="width: 150px;"></a>
+                    </li>
+                    <li style="width: 150px; margin-left: 950px;">
+                        <a asp-action="Logout" asp-controller="Account" style="width: 150px;"></a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <sidebar>
+            <div>
+                <div style="background-image: url(@Url.Content(pathToImage)); background-size: cover; overflow: hidden;"></div>
+                <div>
+                    <form enctype="multipart/form-data" method="post" asp-action="ChangeImage" asp-controller="Home">
+                        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">
+                            Set profile photo
+                        </p>
+                        <p>
+                            <input type="hidden" name="UserId" value="@ViewBag.User.Id" />
+                            <input type="file" name="File" accept="image/*"> 
+                        </p>
+                        <p>
+                            <button type="submit">Send</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <p>
+                <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Name</span> : @ViewBag.User.Email
+            </p>
+            <p>
+                <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Count_of_to-dos</span> : @ViewBag.User.ToDos.Count
+            </p>
+            <p>
+                <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Role</span> : @ViewBag.User.Role
+            </p>
+        </sidebar>
+        <main>
+            <div>
+                <a asp-action="Index" asp-controller="Home" asp-route-id="@ViewBag.User.Id">Main Page &#8594</a>
+            </div>
+            <div class="score_list_block">
+                @foreach (var i in Model.OrderByDescending(u => u.CountOfFinished).ToList())
+                {
+                    if (count > 1)
+                    {
+                        indent = 0;
+                    }
+                    <div style="margin-top: @(indent)px;">
+                    
+                        <div class="place">@count</div>
+                        @{ 
+                            count++;
+                        }
+                        <div class="user_information">
+                            <p>
+                                <span style="font-weight: bold;">Name : </span>@i.Email
+                            </p>
+                            <p>
+                                <span style="font-weight: bold;">Count_of_completes : </span>@i.CountOfFinished
+                            </p>
+                        </div>
+                        <div class="user_photo" style="background-image: url(@Url.Content("~/images/" + (i.PhotoFilePath ?? "user-nophoto.jpg"))); background-size: cover;"></div>
+                    </div>
+                }
+            </div>
+        </main>
+        <section class="comment_section">
+            <div class="comment_write">
+                <p style="text-indent: 30px; font-family:Arial, Helvetica, sans-serif; font-weight: bold;">
+                    Comments (n)
+                </p>
+                <ul>
+                    <li style="background-image: url(@Url.Content(pathToImage)); background-size: cover; background-position-x: -9px;"></li>
+                    <li>
+                        <form method="POST" asp-action="Create" asp-controller="Message">
+                            <div>
+                                <input type="hidden" name="UserId" value="@ViewBag.User.Id" />
+                                <textarea placeholder="Text of comment" name="Content"></textarea>
+                            </div>
+                            <div class="message_button_container">
+                                <button type="reset" class="message_button">Cancel</button>
+                                <button type="submit" style="margin-left: 5px;" class="message_button">Submit</button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="comment_read">
+                @foreach (var i in ViewBag.Messages)
+                {
+                    
+                    <div>
+                        <ul>
+                            <li style="background-image: url(@Url.Content("~/images/" + (i.User.PhotoFilePath ?? "user-nophoto.jpg"))); background-size: cover;">
+
+                            </li>
+                            <li>
+                                <p>
+                                    <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Name : </span>@i.User.Email
+                                    <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">DateTime : </span>@i.DateTimeStr
+                                </p>
+                                <p>
+                                    @i.Content
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </section>
+        <script>
+        
+        </script>
+    </body>
+</html>

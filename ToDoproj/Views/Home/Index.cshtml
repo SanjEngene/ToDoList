@@ -1,0 +1,146 @@
+﻿@model ToDoproj.Models.User
+@using System.Security.Claims;
+@{
+    string pathToImage = "~/images/" + (Model.PhotoFilePath ?? "user-nophoto.jpg");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link href='~/css/to-do_list_prototype.css' type='text/css' rel='stylesheet'>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li style="width: 230px;">
+                    <a asp-action="ScoreList" asp-controller="Home" asp-route-id="@Model.Id" style="width: 230px;"></a>
+                </li>
+                <li style="width: 150px;">
+                    <a asp-action="Create" asp-controller="ToDo" asp-route-userId="@Model.Id" style="width: 150px;"></a>
+                </li>
+                <li style="width: 150px; margin-left: 950px;">
+                    <a asp-action="Logout" asp-controller="Account" style="width: 150px;"></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <sidebar>
+        <div>
+            <div style="background-image: url(@Url.Content(pathToImage)); background-size: cover; overflow: hidden;">
+
+            </div>
+            <div>
+                <form enctype="multipart/form-data" method="post" asp-action="ChangeImage" asp-controller="Home">
+                    <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">
+                        Set profile photo
+                    </p>
+                    <p>
+                        <input type="hidden" name="UserId" value="@Model.Id" />
+                        <input type="file" name="File" accept="image/*">
+                    </p>
+                    <p>
+                        <button type="submit">Send</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Name</span> : @Model.Email
+        </p>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Count_of_to-dos</span> : @Model.ToDos.Count
+        </p>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Role</span> : @Model.Role
+        </p>
+    </sidebar>
+    <main>
+        @if (User.FindFirst(claim => claim.Type == ClaimsIdentity.DefaultRoleClaimType).Value == "admin")
+        {
+            <section id="adminpage_link">
+                <a asp-action="Index" asp-controller="Admin" asp-route-id="@Model.Id">Admin Page &#8594</a>
+            </section>
+        }
+        <div>
+            <p></p>
+            @foreach (string day in ViewBag.DaysOfWeek)
+            {
+                <div>
+                    <div class="day_of_the_week">
+                        @day
+                        <div>
+
+                        </div>
+                    </div>
+                    @foreach (var todo in Model.ToDos.Where(i => i.DayOfWeek == day))
+                    {
+                        <div class="to-do">
+                            <header>@todo.Header</header>
+                            <ul>
+                                <li>@todo.Content</li>
+                                <li>
+                                    <form method="POST" asp-action="Remove" asp-controller="ToDo">
+                                        <input type="hidden" name="Id" value="@todo.Id" />
+                                        <input type="hidden" name="UserId" value="@Model.Id" />
+                                        <p style="text-align: center;">
+                                            IsDone: <input type="checkbox" name="IsFinished" value="true">
+                                        </p>
+                                        <button type="submit">Remove</button>
+                                    </form>
+                                </li>
+                            </ul>
+                            <footer>
+                                DateTime
+                            </footer>
+                        </div>
+                    }
+                    <div>
+                        <ul>
+                            <li>Add new to-do item &#8594</li>
+                            <li>
+                                <form method="GET" asp-action="Create" asp-controller="ToDo">
+                                    <input type="hidden" name="userId" value="@Model.Id" />
+                                    <button type="submit" class="to-do_creator">Create</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <script>
+        function set_open_close_onclick() {
+            let elements = document.body.querySelector("main > div").children;
+            for (let child of elements) {
+                if (child.tagName == 'DIV') {
+                    let arrow = child.firstElementChild.firstElementChild;
+                    arrow.setAttribute('onclick', 'show(event)');
+                }
+            }
+        }
+
+        function show(e) {
+            let resizable_block = e.target.parentElement.parentElement;
+            if (resizable_block.style.height != "auto") {
+                resizable_block.style.height = "auto";
+                e.target.style.borderTopWidth = "0px";
+                e.target.style.borderBottom = "5px solid black";
+                e.target.style.top = "80%";
+            }
+            else {
+                resizable_block.style.height = "70px";
+                e.target.style.borderTopWidth = "5px";
+                e.target.style.borderBottomWidth = "0px";
+                e.target.style.top = "80%";
+            }
+        }
+
+        set_open_close_onclick();
+    </script>
+</body>
+</html>

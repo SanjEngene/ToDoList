@@ -1,0 +1,48 @@
+﻿@model ToDoproj.ViewModels.RegistrationModel
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <link href="~/css/registration.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <main style="margin-top: 30px;">
+            <div style="margin: 10px 190px 0px 190px; border: 1px solid black;">
+                
+            </div>
+            <p>
+                Welcome to To-do Proj
+            </p>
+            <div>
+                <form method="POST">
+                    <input asp-for="EmailAddress" placeholder="Email" id="email">
+                    <br>
+                    <input type="password" asp-for="Password" placeholder="Password" id="password">
+                    <br>
+                    <input type="password" asp-for="ConfirmPassword" placeholder="Confirm password" id="confirm">
+                    <p>
+                        <button type="submit">Sign up</button>
+                    </p>
+                    <p id="or">
+                        OR
+                    </p>
+                    <ul>
+                        <li>
+                            <div>
+
+                            </div>
+                            Continue with Facebook
+                        </li>
+                        <li>
+                            <div>
+
+                            </div>
+                            Continue with Google
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

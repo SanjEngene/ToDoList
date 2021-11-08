@@ -1,0 +1,96 @@
+﻿@model ToDoproj.Models.User
+@{
+    string pathToImage = "~/images/" + (Model.PhotoFilePath ?? "user-nophoto.jpg");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <link href="~/css/create.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li style="width: 230px;">
+                    <a asp-action="ScoreList" asp-controller="Home" asp-route-id="@Model.Id" style="width: 230px;"></a>
+                </li>
+                <li style="width: 150px;">
+                    <a asp-action="Create" asp-controller="ToDo" asp-route-userId="@Model.Id" style="width: 150px;"></a>
+                </li>
+                <li style="width: 150px; margin-left: 950px;">
+                    <a asp-action="Login" asp-controller="Account" style="width: 150px;"></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <sidebar>
+        <div>
+            <div style="background-image: url(@Url.Content(pathToImage)); background-size: cover; overflow: hidden;"></div>
+            <div>
+                <form enctype="multipart/form-data" method="post" asp-action="ChangeImage" asp-controller="Home">
+                    <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">
+                        Set profile photo
+                    </p>
+                    <p>
+                        <input type="hidden" name="UserId" value="@Model.Id" />
+                        <input type="file" name="File" accept="image/*">
+                    </p>
+                    <p>
+                        <button type="submit">Send</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Name</span> : @Model.Email
+        </p>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Count_of_to-dos</span> : @Model.ToDos.Count
+        </p>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Role</span> : @Model.Role
+        </p>
+    </sidebar>
+    <main>
+        <div>
+            To-do Form
+        </div>
+        <div>
+            <form method="post">
+                <input type="hidden" name="UserId" value="@Model.Id">
+                <p>
+                    <label id="Header">Header</label>
+                    <br>
+                    <input type="text" name="Header" id="Header" placeholder="Header...">
+                </p>
+                <p>
+                    <label id="Content">Content</label>
+                    <br>
+                    <textarea placeholder="Content..." name="Content" id="Content"></textarea>
+                </p>
+                <p>
+                    <label id="DayOfWeek">Day Of Week</label>
+                    <br>
+                    <select name="DayOfWeek" id="DayOfWeek" style="margin-top: 5px;">
+                        <option selected>Monday</option>
+                        <option>Tuesday</option>
+                        <option>Wednesday</option>
+                        <option>Thursday</option>
+                        <option>Friday</option>
+                        <option>Saturday</option>
+                        <option>Sunday</option>
+                    </select>
+                </p>
+                <p>
+                    <button type="submit" id="to_do_create_submit">Submit</button>
+                    <a asp-action="Index" asp-controller="Home" asp-route-id="@Model.Id" id="back_to_list_link">Back To List</a>
+                </p>
+            </form>
+        </div>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

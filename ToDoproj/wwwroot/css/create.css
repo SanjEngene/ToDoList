@@ -1,0 +1,136 @@
+body{
+    padding: 0px;
+    margin: 0px;
+}
+body > header{
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+body > sidebar{
+    height: auto;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    float: left;
+}
+main{
+    height: 638px;
+    margin-left: 300px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+main > div{
+    margin-left: 100px;
+}
+main > div:first-child{
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: larger;
+}
+main > div:last-child > form > p{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#to_do_create_submit{
+    display: inline-block;
+    width: 150px;
+    height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+#to_do_create_submit:focus{
+    outline: none;
+}
+#back_to_list_link {
+    display: block;
+    width: 150px;
+    height: 28px;
+    text-decoration: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    line-height: 28px;
+    border: 1px solid black;
+    float: right;
+    transform: translateX(-875px);
+}
+main > div:last-child > form input[type="text"]{
+    display: inline-block;
+    width: 300px;
+    height: 30px;
+    margin-top: 5px;
+}
+main > div:last-child > form input[type="text"]:focus{
+    outline: none;
+}
+main > div:last-child > form textarea{
+    width: 300px;
+    height: 100px;
+    margin-top: 5px;
+}
+main > div:last-child > form textarea:focus{
+    outline: none;
+}
+body > footer{
+    height: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+    clear: both;
+}
+body > sidebar > div{
+    height: auto;
+    width: auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+body > sidebar > div > div:first-child{
+    margin: 39px 0px 0px 42px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+body > sidebar > div > div:last-child{
+    margin: 0px 0px 10px 30px;
+}
+body > sidebar > div > div:last-child > form > p{
+    margin: 20px 0px 0px 0px;
+}
+body > sidebar > div > div:last-child > form > p:last-child{
+    margin-bottom: 20px;
+}
+body > sidebar > div > div:last-child > form > p > button[type="submit"]{
+    display: inline-block;
+    width: 95px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+}
+body > sidebar > div > div:last-child > form > p > button[type="submit"]:focus{
+    outline: none;
+}
+body > sidebar > p{
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid black;
+}
+body > header > nav > ul{
+    padding-left: 0px;
+    margin: 0px 0px 0px 70px;
+    list-style-type: none;
+    height: auto;
+}
+body > header > nav > ul > li{
+    display: inline-block;
+    height: 60px;
+    background-color:rgba(255, 255, 255, 0.2);
+    border: 1px solid black;    
+}
+body > header > nav > ul > li > a{
+    display: block;
+    height: 60px;
+}

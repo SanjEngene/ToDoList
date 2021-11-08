@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ToDoproj.Models.User>
+@{
+    string pathToImage = "~/images/" + (ViewBag.Admin.PhotoFilePath ?? "user-nophoto.jpg");
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset='utf-8'>
+    <link href='~/css/admin.css' type='text/css' rel='stylesheet'>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li style="width: 230px;">
+                    <a asp-action="ScoreList" asp-controller="Home" asp-route-id="@ViewBag.Admin.Id" style="width: 230px;"></a>
+                </li>
+                <li style="width: 150px;">
+                    <a asp-action="Create" asp-controller="ToDo" asp-route-userId="@ViewBag.Admin.Id" style="width: 150px;"></a>
+                </li>
+                <li style="width: 150px; margin-left: 950px;">
+                    <a asp-action="Login" asp-controller="Account" style="width: 150px;"></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <sidebar>
+        <div>
+            <div style="background-image: url(@Url.Content(pathToImage)); background-size: cover; overflow: hidden;"></div>
+            <div>
+                <form enctype="multipart/form-data" method="post" asp-action="ChangeImage" asp-controller="Home">
+                    <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">
+                        Set profile photo
+                    </p>
+                    <p>
+                        <input type="hidden" name="UserId" value="@ViewBag.Admin.Id" />
+                        <input type="file" name="File" accept="image/*">
+                    </p>
+                    <p>
+                        <button type="submit">Send</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Name</span> : @ViewBag.Admin.Email
+        </p>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Count_of_to-dos</span> : @ViewBag.Admin.ToDos.Count
+        </p>
+        <p>
+            <span style="font-weight: bold; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Role</span> : @ViewBag.Admin.Role
+        </p>
+    </sidebar>
+    <main>
+        <div>
+            <a asp-action="Index" asp-controller="Home" asp-route-id="@ViewBag.Admin.Id">Main Page &#8594</a>
+        </div>
+        <section class='user_list'>
+            <table>
+                <tr id='column_description'>
+                    <td>Id</td>
+                    <td>Email</td>
+                    <td>CountOfToDos</td>
+                    <td>CountOfCompletes</td>
+                    <td>Remove</td>
+                </tr>
+                @foreach (ToDoproj.Models.User user in Model)
+                {
+                    if (user.Role == "admin")
+                    {
+                        continue;
+                    }
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Email</td>
+                    <td>@user.ToDos.Count</td>
+                    <td>@user.CountOfFinished</td>
+                    <td>
+                        <form method='post' asp-action="Remove" asp-controller="Admin">
+                            <input type='hidden' name='userId' value="@user.Id">
+                            <input type="hidden" name="adminId" value="@ViewBag.Admin.Id" />
+                            <button type='submit' class="delete_button">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                }
+            </table>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+</html>
